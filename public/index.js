@@ -1,3 +1,14 @@
+(function () {
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker
+      .register("./serviceWorker.js", { scope: "/" })
+      .then(() => console.log("Service Worker registered successfully."))
+      .catch((error) =>
+        console.log("Service Worker registration failed:", error)
+      );
+  }
+})();
+
 let transactions = [];
 let myChart;
 
@@ -99,6 +110,7 @@ function sendTransaction(isAdding) {
     value: amountEl.value,
     date: new Date().toISOString(),
   };
+  console.log(transaction, "Tr rec");
 
   // if subtracting funds, convert amount to negative number
   if (!isAdding) {
